@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import EventService from './services/EventService';
 
 Vue.use(Vuex);
 
@@ -89,10 +90,18 @@ export default new Vuex.Store({
     ],
   },
   mutations: {
-
+    ADD_EVENT(state, event) {
+      state.events.push(event);
+    },
   },
   actions: {
-
+    // commit from the context, and event as a payload
+    createEvent({ commit }, event) {
+      return EventService.postEvent(event)
+        .then(() => {
+          commit('ADD_EVENT', event);
+        });
+    },
   },
   getters: {
     catLength: state => state.categories.length,

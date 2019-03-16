@@ -2,12 +2,11 @@
   "events": [
     {
       "id": 5928101,
-      "user": {
+      "organizer": {
         "id": "abc123",
         "name": "Adam"
       },
       "category": "animal welfare",
-      "organizer": "Adam",
       "title": "Cat Cabaret",
       "description": "Yay felines!",
       "location": "Meow Town",
@@ -27,12 +26,11 @@
     },
     {
       "id": 8419988,
-      "user": {
+      "organizer": {
         "id": "abc123",
         "name": "Adam"
       },
       "category": "animal welfare",
-      "organizer": "Adam",
       "title": "Kitty Cluster",
       "description": "Yay cats!",
       "location": "Catlandia",
@@ -55,17 +53,12 @@
     },
     {
       "id": 4582797,
-      "user": {
-        "id": "abc123",
-        "name": "Adam"
-      },
-      "category": "animal welfare",
       "organizer": "Adam",
+      "category": "animal welfare",
       "title": "Puppy Parade",
       "description": "Yay pups!",
       "location": "Puptown ",
       "date": "2019-02-02T23:27:00.000Z",
-      "time": "1:00",
       "time": "7:00",
       "attendees": [
         {
@@ -75,6 +68,48 @@
           "name": "Erin"
         }
       ]
+    },
+    {
+      "id": 557988,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "nature",
+      "title": "TESTING",
+      "description": "somthing will work?",
+      "location": "Boulder co",
+      "date": "2019-03-06T20:49:00.000Z",
+      "time": "4:00",
+      "attendees": []
+    },
+    {
+      "id": 778307,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "animal welfare",
+      "title": "will this work?",
+      "description": "",
+      "location": "DENVER",
+      "date": "2019-03-28T19:53:00.000Z",
+      "time": "4:00",
+      "attendees": []
+    },
+    {
+      "id": 104032,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "nature",
+      "title": "Planting trees",
+      "description": "goods stuff",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }
