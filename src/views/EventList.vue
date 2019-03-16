@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import EventService from '@/services/EventService.js';
-import EventCard from '@/components/EventCard.vue';
+import EventService from '../services/EventService';
+import EventCard from '../components/EventCard.vue';
 
 export default {
   components: { EventCard },

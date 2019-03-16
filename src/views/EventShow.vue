@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import EventService from '@/services/EventService.js';
+import EventService from '../services/EventService';
 
 export default {
   props: ['id'],
   data() {
     return {
-      event: {}
-    }
+      event: {},
+    };
   },
   created() {
     EventService.getEvent(this.id)
@@ -40,10 +40,9 @@ export default {
         this.event = response.data;
       })
       .catch((error) => {
-        console.log("opsi", error);
-
-      })
-  }
+        console.log('opsi', error);
+      });
+  },
 };
 </script>
 
