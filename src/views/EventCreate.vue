@@ -42,30 +42,30 @@ import DatePicker from 'vuejs-datepicker';
 export default {
   components: { DatePicker },
   data() {
-    let times = [];
-    for (let i = 1; i <= 24; i++) {
-      times.push(`${i}:00`)
+    const times = [];
+    for (let i = 1; i <= 24; i += 1) {
+      times.push(`${i}:00`);
     }
     return {
       event: this.createNewEventObject(),
       times,
       categories: this.$store.state.categories,
-    }
+    };
   },
   methods: {
     createEvent() {
       this.$store.dispatch('createEvent', this.event)
         .then(() => {
-          this.$router.push({ name: 'event-show', params: { id: this.event.id } })
+          this.$router.push({ name: 'event-show', params: { id: this.event.id } });
           this.event = this.createNewEventObject();
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(err);
         });
     },
     createNewEventObject() {
-      const organizer = this.$store.state.user
-      const id = Math.floor(Math.random() * 1000000)
+      const organizer = this.$store.state.user;
+      const id = Math.floor(Math.random() * 1000000);
       return {
         id,
         organizer,
@@ -76,9 +76,9 @@ export default {
         date: '',
         time: '',
         attendees: [],
-      }
-    }
-  }
+      };
+    },
+  },
 };
 </script>
 
