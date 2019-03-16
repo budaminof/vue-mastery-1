@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import Vue from 'vue';
 import Vuex from 'vuex';
 import EventService from './services/EventService';
@@ -11,95 +12,36 @@ export default new Vuex.Store({
     },
     categories: ['sustainability', 'nature', 'animal welfare',
       'housing', 'education', 'food', 'community'],
-    events: [
-      {
-        id: 5928101,
-        user: {
-          id: 'abc123',
-          name: 'Adam',
-        },
-        category: 'animal welfare',
-        organizer: 'Adam',
-        title: 'Cat Cabaret',
-        description: 'Yay felines!',
-        location: 'Meow Town',
-        date: '2019-01-03T21:54:00.000Z',
-        time: '2:00',
-        attendees: [
-          {
-            name: 'Jonathan',
-          },
-          {
-            name: 'Bud',
-          },
-          {
-            name: 'Ryan',
-          },
-        ],
-      },
-      {
-        id: 8419988,
-        user: {
-          id: 'abc123',
-          name: 'Adam',
-        },
-        category: 'animal welfare',
-        organizer: 'Adam',
-        title: 'Kitty Cluster',
-        description: 'Yay cats!',
-        location: 'Catlandia',
-        date: '2019-01-31T22:09:00.000Z',
-        time: '7:00',
-        attendees: [
-          {
-            name: 'Jonathan',
-          },
-          {
-            name: 'Bud',
-          },
-          {
-            name: 'Ryan',
-          },
-          {
-            name: 'Erin',
-          },
-        ],
-      },
-      {
-        id: 4582797,
-        user: {
-          id: 'abc123',
-          name: 'Adam',
-        },
-        category: 'animal welfare',
-        organizer: 'Adam',
-        title: 'Puppy Parade',
-        description: 'Yay pups!',
-        location: 'Puptown ',
-        date: '2019 - 02 - 02T23: 27: 00.000Z',
-        time: '1:00',
-        attendees: [
-          {
-            name: 'Bud',
-          },
-          {
-            name: 'Erin',
-          },
-        ],
-      },
-    ],
+    events: [],
+    eventsTotalCount: null,
   },
   mutations: {
     ADD_EVENT(state, event) {
       state.events.push(event);
     },
+    SET_EVENTS(state, events) {
+      state.events = events;
+    },
+    SET_EVENTS_COUNT(state, count) {
+      state.eventsTotalCount = Number(count);
+    },
   },
   actions: {
     // commit from the context, and event as a payload
-    createEvent({ commit }, event) {
-      return EventService.postEvent(event)
-        .then(() => {
-          commit('ADD_EVENT', event);
+    async createEvent({ commit }, event) {
+      const payload = await EventService.postEvent(event);
+      commit('ADD_EVENT', payload.data);
+    },
+    // payloads in Mutations and Actions
+    // can be single variable OR an object
+    fetchEvents({ commit }, { perPage, page }) {
+      EventService.getEvents(perPage, page)
+        .then((response) => {
+          commit('SET_EVENTS', response.data);
+          commit('SET_EVENTS_COUNT', response.headers['x-total-count']);
+        })
+        .catch((error) => {
+          console.log('OPSI', error);
         });
     },
   },

@@ -110,6 +110,145 @@
       "date": "",
       "time": "",
       "attendees": []
+    },
+    {
+      "id": 4561,
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "category": "animal welfare",
+      "title": "Cat Cabaret",
+      "description": "Yay felines!",
+      "location": "Meow Town",
+      "date": "2019-01-03T21:54:00.000Z",
+      "time": "2:00",
+      "attendees": [
+        {
+          "name": "Jonathan"
+        },
+        {
+          "name": "Bud"
+        },
+        {
+          "name": "Ryan"
+        }
+      ]
+    },
+    {
+      "id": 77772333,
+      "organizer": {
+        "id": "abc123",
+        "name": "Adam"
+      },
+      "category": "animal welfare",
+      "title": "Kitty Cluster",
+      "description": "Yay cats!",
+      "location": "Catlandia",
+      "date": "2019-01-31T22:09:00.000Z",
+      "time": "7:00",
+      "attendees": [
+        {
+          "name": "Jonathan"
+        },
+        {
+          "name": "Bud"
+        },
+        {
+          "name": "Ryan"
+        },
+        {
+          "name": "Erin"
+        }
+      ]
+    },
+    {
+      "id": 789,
+      "organizer": "Adam",
+      "category": "animal welfare",
+      "title": "Puppy Parade",
+      "description": "Yay pups!",
+      "location": "Puptown ",
+      "date": "2019-02-02T23:27:00.000Z",
+      "time": "7:00",
+      "attendees": [
+        {
+          "name": "Bud"
+        },
+        {
+          "name": "Erin"
+        }
+      ]
+    },
+    {
+      "id": 56,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "nature",
+      "title": "TESTING",
+      "description": "somthing will work?",
+      "location": "Boulder co",
+      "date": "2019-03-06T20:49:00.000Z",
+      "time": "4:00",
+      "attendees": []
+    },
+    {
+      "id": 77867,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "animal welfare",
+      "title": "will this work?",
+      "description": "",
+      "location": "DENVER",
+      "date": "2019-03-28T19:53:00.000Z",
+      "time": "4:00",
+      "attendees": []
+    },
+    {
+      "id": 104456,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "nature",
+      "title": "Planting trees",
+      "description": "goods stuff",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "id": 433880,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "sustainability",
+      "title": "ASYNC AWAIT",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
+    },
+    {
+      "id": 822762,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "nature",
+      "title": "testing await",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }

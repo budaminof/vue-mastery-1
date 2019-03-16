@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <NavBar/>
-    <router-view/>
+    <!-- this makes sure that the components get rerendered if the url 
+    uncluding query paramters are changing-->
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 

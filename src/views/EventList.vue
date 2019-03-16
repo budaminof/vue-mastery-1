@@ -3,28 +3,37 @@
     <h1>Event Listing</h1>
     <EventCard v-for="event in events" :key="event.id" :event="event"/>
     <BaseIcon/>
+    <router-link
+      v-if="page !== 1"
+      :to="{ name: 'event-list', query: {page: page - 1 }}"
+      rel="prev"
+    >PREVUES PAGE</router-link>
+    <span v-if="page !== 1">|</span>
+    <router-link
+      v-if="eventsTotalCount > page * 3"
+      :to="{ name: 'event-list', query: {page: page + 1 }}"
+      rel="next"
+    >NEXT PAGE</router-link>
   </div>
 </template>
 
 <script>
-import EventService from '../services/EventService';
+import { mapState } from 'vuex';
 import EventCard from '../components/EventCard.vue';
 
 export default {
   components: { EventCard },
-  data() {
-    return {
-      events: [],
-    };
-  },
   created() {
-    EventService.getEvents()
-      .then((response) => {
-        this.events = response.data;
-      })
-      .catch((error) => {
-        console.log('OPSI', error);
-      });
+    //we call the actions
+    this.$store.dispatch('fetchEvents', { perPage: 3, page: this.page });
+  },
+  //to get access to events state
+  computed: {
+    page() {
+      // if no number - assume we are on the first page
+      return parseInt(this.$route.query.page) || 1;
+    },
+    ...mapState(['events', 'eventsTotalCount']),
   },
 };
 </script>
