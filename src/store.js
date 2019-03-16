@@ -13,7 +13,8 @@ export default new Vuex.Store({
     categories: ['sustainability', 'nature', 'animal welfare',
       'housing', 'education', 'food', 'community'],
     events: [],
-    eventsTotalCount: null,
+    eventsTotalCount: 0,
+    event: {},
   },
   mutations: {
     ADD_EVENT(state, event) {
@@ -24,6 +25,9 @@ export default new Vuex.Store({
     },
     SET_EVENTS_COUNT(state, count) {
       state.eventsTotalCount = Number(count);
+    },
+    SET_EVENT(state, event) {
+      state.event = event;
     },
   },
   actions: {
@@ -44,9 +48,22 @@ export default new Vuex.Store({
           console.log('OPSI', error);
         });
     },
+    fetchEvent({ commit, getters }, id) {
+      const currentEvent = getters.getEventById(id);
+      if (currentEvent) {
+        commit('SET_EVENT', currentEvent);
+      } else {
+        EventService.getEvent(id)
+          .then((response) => {
+            commit('SET_EVENT', response.data);
+          })
+          .catch((error) => {
+            console.log('opsi', error);
+          });
+      }
+    },
   },
   getters: {
-    catLength: state => state.categories.length,
     getEventById: state => id => state.events.find(event => event.id === id),
   },
 });

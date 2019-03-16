@@ -24,14 +24,11 @@ import EventCard from '../components/EventCard.vue';
 export default {
   components: { EventCard },
   created() {
-    //we call the actions
     this.$store.dispatch('fetchEvents', { perPage: 3, page: this.page });
   },
-  //to get access to events state
   computed: {
     page() {
-      // if no number - assume we are on the first page
-      return parseInt(this.$route.query.page) || 1;
+      return Number(this.$route.query.page) || 1;
     },
     ...mapState(['events', 'eventsTotalCount']),
   },
