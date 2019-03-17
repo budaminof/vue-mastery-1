@@ -249,6 +249,20 @@
       "date": "",
       "time": "",
       "attendees": []
+    },
+    {
+      "id": 293704,
+      "organizer": {
+        "id": "123vbn",
+        "name": "Bud Aminof"
+      },
+      "category": "nature",
+      "title": "NAME SPACED",
+      "description": "",
+      "location": "",
+      "date": "",
+      "time": "",
+      "attendees": []
     }
   ]
 }
