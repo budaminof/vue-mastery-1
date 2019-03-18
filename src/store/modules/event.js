@@ -27,23 +27,44 @@ export const mutations = {
 
 export const actions = {
   // commit from the context, and event as a payload
-  async createEvent({ commit }, event) {
-    const payload = await EventService.postEvent(event);
-    commit('ADD_EVENT', payload.data);
+  createEvent({ commit, dispatch }, event) {
+    return EventService.postEvent(event)
+      .then((payload) => {
+        commit('ADD_EVENT', payload.data);
+        const notification = {
+          type: 'success',
+          message: 'Success, we added your event!',
+        };
+        dispatch('notifications/add', notification, { root: true });
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: `There was a problem while trying to create your event: ${error.message}`,
+        };
+        dispatch('notifications/add', notification, { root: true });
+        throw error;
+      });
   },
   // payloads in Mutations and Actions
   // can be single variable OR an object
-  fetchEvents({ commit }, { perPage, page }) {
+  fetchEvents({ commit, dispatch }, { perPage, page }) {
     EventService.getEvents(perPage, page)
       .then((response) => {
         commit('SET_EVENTS', response.data);
         commit('SET_EVENTS_COUNT', response.headers['x-total-count']);
       })
       .catch((error) => {
-        console.log('OPSI', error);
+        const notification = {
+          type: 'error',
+          message: `There was a problem while trying to get all the events: ${error.message}`,
+        };
+        // this allows the dispatcher to go to the root store, to the notifications
+        // module and get the action.
+        dispatch('notifications/add', notification, { root: true });
       });
   },
-  fetchEvent({ commit, getters }, id) {
+  fetchEvent({ commit, getters, dispatch }, id) {
     const currentEvent = getters.getEventById(id);
     if (currentEvent) {
       commit('SET_EVENT', currentEvent);
@@ -53,7 +74,11 @@ export const actions = {
           commit('SET_EVENT', response.data);
         })
         .catch((error) => {
-          console.log('opsi', error);
+          const notification = {
+            type: 'error',
+            message: `There was a problem while trying to get the event: ${error.message}`,
+          };
+          dispatch('notifications/add', notification, { root: true });
         });
     }
   },
