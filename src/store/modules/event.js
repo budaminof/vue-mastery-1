@@ -8,6 +8,7 @@ export const state = {
   events: [],
   eventsTotalCount: 0,
   event: {},
+  perPage: 3,
 };
 
 export const mutations = {
@@ -48,11 +49,12 @@ export const actions = {
   },
   // payloads in Mutations and Actions
   // can be single variable OR an object
-  fetchEvents({ commit, dispatch }, { perPage, page }) {
-    EventService.getEvents(perPage, page)
+  fetchEvents({ commit, dispatch }, { page }) {
+    return EventService.getEvents(state.perPage, page)
       .then((response) => {
         commit('SET_EVENTS', response.data);
         commit('SET_EVENTS_COUNT', response.headers['x-total-count']);
+        return response.data;
       })
       .catch((error) => {
         const notification = {
@@ -68,19 +70,20 @@ export const actions = {
     const currentEvent = getters.getEventById(id);
     if (currentEvent) {
       commit('SET_EVENT', currentEvent);
-    } else {
-      EventService.getEvent(id)
-        .then((response) => {
-          commit('SET_EVENT', response.data);
-        })
-        .catch((error) => {
-          const notification = {
-            type: 'error',
-            message: `There was a problem while trying to get the event: ${error.message}`,
-          };
-          dispatch('notifications/add', notification, { root: true });
-        });
+      return currentEvent;
     }
+    return EventService.getEvent(id)
+      .then((response) => {
+        commit('SET_EVENT', response.data);
+        return response.data;
+      })
+      .catch((error) => {
+        const notification = {
+          type: 'error',
+          message: `There was a problem while trying to get the event: ${error.message}`,
+        };
+        dispatch('notifications/add', notification, { root: true });
+      });
   },
 };
 

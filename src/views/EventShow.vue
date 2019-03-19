@@ -25,15 +25,15 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
-
+// we could user in-Component Guards => beforeRouteEnter
 export default {
-  props: ['id'],
-  created() {
-    this.fetchEvent(this.id);
+  props: {
+    id: Number,
+    event: {
+      type: Object,
+      required: true,
+    },
   },
-  computed: mapState({ event: state => state.event.event }),
-  methods: mapActions('event', ['fetchEvent']),
 };
 </script>
 

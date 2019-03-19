@@ -10,7 +10,7 @@
     >PREVUES PAGE</router-link>
     <span v-if="page !== 1">|</span>
     <router-link
-      v-if="haveNextPage"
+      v-if="hasNextPage"
       :to="{ name: 'event-list', query: {page: page + 1 }}"
       rel="next"
     >NEXT PAGE</router-link>
@@ -18,22 +18,44 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import EventCard from '../components/EventCard.vue';
+import EventCard from '@/components/EventCard.vue'
+import { mapState } from 'vuex'
+import store from '@/store/store'
 
+// Moved the current page & action call outside the component
+function getPageEvents(routeTo, next) {
+  const currentPage = parseInt(routeTo.query.page || 1)
+  store
+    .dispatch('event/fetchEvents', {
+      page: currentPage
+    })
+    .then(() => {
+      // pass it into the component as a prop, so we can print next pages
+      routeTo.params.page = currentPage
+      next()
+    })
+}
 export default {
-  components: { EventCard },
-  created() {
-    this.$store.dispatch('event/fetchEvents', { perPage: 3, page: this.page });
+  props: {
+    page: { // current page gets passed in as a prop
+      type: Number,
+      required: true
+    }
+  },
+  components: {
+    EventCard
+  },
+  beforeRouteEnter(routeTo, routeFrom, next) { // Before we enter the route
+    getPageEvents(routeTo, next)
+  },
+  beforeRouteUpdate(routeTo, routeFrom, next) { // Before we update the route
+    getPageEvents(routeTo, next)
   },
   computed: {
-    page() {
-      return Number(this.$route.query.page) || 1;
+    hasNextPage() {
+      return this.event.eventsTotalCount > this.page * this.event.perPage
     },
-    haveNextPage() {
-      return this.event.eventsTotalCount > this.page * this.perPage;
-    },
-    ...mapState(['event', 'user']),
-  },
-};
+    ...mapState(['event', 'user'])
+  }
+}
 </script>
