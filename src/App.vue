@@ -240,4 +240,7 @@ select:focus::ms-value {
 select::ms-expand {
   opacity: 0;
 }
+input.error {
+  border: 1px solid #f00;
+}
 </style>

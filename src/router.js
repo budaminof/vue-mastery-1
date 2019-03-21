@@ -7,6 +7,7 @@ import EventList from './views/EventList.vue';
 import EventShow from './views/EventShow.vue';
 import NotFound from './views/NotFound.vue';
 import NetworkIssue from './views/NetworkIssue.vue';
+import Example from './views/ExampleVue.vue';
 import store from '@/store/store';
 
 Vue.use(Router);
@@ -44,6 +45,11 @@ const router = new Router({
       path: '/create',
       name: 'event-create',
       component: EventCreate,
+    },
+    {
+      path: '/example',
+      name: 'Example',
+      component: Example,
     },
     {
       path: '/404',
