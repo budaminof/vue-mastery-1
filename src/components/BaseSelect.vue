@@ -13,25 +13,15 @@
 </template>
 
 <script>
+import { formFieldMixin } from '../mixins/FormFieldMixin.js';
+
 export default {
-  // ATTRAS will not work for styling attributes.
-  // VUE3 will have attras include styling
-  inheritAttrs: false,
+  mixins: [formFieldMixin],
   props: {
-    label: {
-      type: String,
-      default: '',
-    },
-    value: [String, Number],
     options: {
       type: Array,
       required: true,
     }
-  },
-  methods: {
-    updateValue(event) {
-      this.$emit('input', event.target.value);
-    },
   },
 };
 </script>

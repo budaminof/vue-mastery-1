@@ -9,6 +9,15 @@ import 'nprogress/nprogress.css';
 
 Vue.use(Vuelidate);
 
+// be careful with those.
+// EVERY component will have access to those.
+// also - it has to ve declared above the Vue instance
+// Vue.mixin({
+//   mounted() {
+//     console.log('I am a mixed into every component');
+//   },
+// });
+
 const requireComponent = require.context(
   // The relative path of the components folder
   './components',
