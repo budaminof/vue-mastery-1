@@ -1,11 +1,11 @@
 <template>
   <div>
-    <label v-if="label">{{label}}</label>
-    <select type="text" :value="value" @change="updateValue" v-bind="$attrs">
+    <label v-if="label">{{ label }}</label>
+    <select :value="value" @change="updateValue" v-bind="$attrs" v-on="$listeners">
       <option
         v-for="option in options"
         :value="option"
-        :key="option"
+        :key="option.id"
         :selected="option === value"
       >{{ option }}</option>
     </select>
@@ -14,27 +14,19 @@
 
 <script>
 export default {
-  // ATTRAS will not work for styling attributes.
-  // VUE3 will have attras include styling
   inheritAttrs: false,
   props: {
-    label: {
-      type: String,
-      default: '',
-    },
-    value: [String, Number],
     options: {
       type: Array,
-      required: true,
-    }
+      required: true
+    },
+    value: [String, Number],
+    label: String
   },
   methods: {
     updateValue(event) {
-      this.$emit('input', event.target.value);
-    },
-  },
-};
+      this.$emit('input', event.target.value)
+    }
+  }
+}
 </script>
-
-<style scoped>
-</style>
