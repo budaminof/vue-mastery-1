@@ -6,9 +6,10 @@ import App from './App.vue';
 import router from './router';
 import store from './store/store';
 import 'nprogress/nprogress.css';
+import DateFilter from './fiters/date';
 
+Vue.filter('date', DateFilter);
 Vue.use(Vuelidate);
-
 // be careful with those.
 // EVERY component will have access to those.
 // also - it has to ve declared above the Vue instance
