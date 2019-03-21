@@ -28,7 +28,7 @@
 // we could user in-Component Guards => beforeRouteEnter
 export default {
   props: {
-    id: Number,
+    id: [String, Number],
     event: {
       type: Object,
       required: true,
